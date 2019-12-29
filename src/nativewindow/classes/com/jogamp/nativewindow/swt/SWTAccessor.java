@@ -226,18 +226,30 @@ public class SWTAccessor {
                     m6 = cGDK.getDeclaredMethod(str_gdk_x11_display_get_xdisplay, handleType);
                     m7 = cGDK.getDeclaredMethod(str_gdk_window_get_display, handleType);
                 } else {
-                    m5 = cGTK.getDeclaredMethod(str_gdk_x11_drawable_get_xdisplay, handleType);
+                	try {
+                		m5 = cGTK.getDeclaredMethod(str_gdk_x11_drawable_get_xdisplay, handleType);
+                	} catch (NoSuchMethodException ex) {
+                    	m5 = cGDK.getDeclaredMethod(str_gdk_x11_drawable_get_xdisplay, handleType);
+                    }
                 }
                 if (_gtk_version.compareTo(GTK_VERSION_3_0_0) >= 0) {
                     m9 = cGDK.getDeclaredMethod(str_gdk_x11_window_get_xid, handleType);
                 } else {
+                	try {
                     m8 = cGTK.getDeclaredMethod(str_gdk_x11_drawable_get_xid, handleType);
+                	} catch (NoSuchMethodException ex) {
+                    	m8 = cGDK.getDeclaredMethod(str_gdk_x11_drawable_get_xid, handleType);
+                    }
                 }
 
                 if (_gtk_version.compareTo(GTK_VERSION_2_90_0) >= 0) {
                     mb = cGDK.getDeclaredMethod(str_gdk_window_set_background_pattern, handleType, handleType);
                 } else {
+                	try {
                     ma = cGTK.getDeclaredMethod(str_gdk_window_set_back_pixmap, handleType, handleType, boolean.class);
+                	} catch (NoSuchMethodException ex) {
+                    	ma = cGDK.getDeclaredMethod(str_gdk_window_set_back_pixmap, handleType, handleType, boolean.class);
+                    }
                 }
             } catch (final Exception ex) { throw new NativeWindowException(ex); }
             // optional
